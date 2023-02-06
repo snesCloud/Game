@@ -1,0 +1,25 @@
+html {
+  	font-family: arial, serif;
+	transform: scale(1);
+	transform-origin: 0 0;
+}
+
+fieldset {
+	size: 40px;
+	font-size: 40px;
+	transform: scale(1.5);
+	transform-origin: 0 0;
+}
+
+h1 {
+	display: flex;
+	justify-content: center;
+}
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 150%;
+	padding-top: 100px;
+}
