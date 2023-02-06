@@ -10,6 +10,9 @@
     <h1>Krabat - Spiel</h1>
     <fieldset>
 	    <legend>Spielerauswahl</legend>
+	    
+	    <p>Spieler: <a id="playerCount">2</a></p>
+
 	    <button id="2" value="2p" name="playerselect" checked>
 	    <label for="2">2 Spieler &nbsp;</label>
 
@@ -20,6 +23,27 @@
 	    <label for="4">4 Spieler &nbsp;</label>
     </fieldset>
 
-    <img src="./ressources/field.png">
+    <img src="./ressources/field.png" alt="field" usermap="#field">
+
+    <map name="workmap">
+	    <area shape="circle" coords="337,300,44" alt="y1" href="google.de">
+    </map>
+
+    <svg height="100" width="100" id="player1">
+      <circle cx="50" cy="50" r="20" stroke="grey" stroke-width="5" fill="purple" />
+    </svg>
+    <svg height="100" width="100" id="player2">
+      <circle cx="50" cy="50" r="20" stroke="grey" stroke-width="5" fill="yellow" />
+    </svg>
+    <svg height="100" width="100" id="player3">
+      <circle cx="50" cy="50" r="20" stroke="grey" stroke-width="5" fill="black" />
+    </svg>
+    <svg height="100" width="100" id="player4">
+      <circle cx="50" cy="50" r="20" stroke="grey" stroke-width="5" fill="blue" />
+    </svg>
+
+
+
+
   </body>
 </html>

@@ -1,14 +1,10 @@
 html {
   	font-family: arial, serif;
-	transform: scale(1);
-	transform-origin: 0 0;
 }
 
 fieldset {
 	size: 40px;
 	font-size: 40px;
-	transform: scale(1.5);
-	transform-origin: 0 0;
 }
 
 button {
@@ -25,6 +21,12 @@ img {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	width: 150%;
+	width: 50%;
 	padding-top: 100px;
 }
+
+svg {
+	transform: scale(0.5);
+	transform-origin: 0 0;
+}
+
