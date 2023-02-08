@@ -22,8 +22,8 @@ event_cards.push(
 "Karte 19"
 );
 
-let player_count = 2;
-let screen_width = screen.width;
+let player_count = 1;
+const players = []
 let player_index;
 
 let sleep = (milliseconds) => {
@@ -43,7 +43,7 @@ async function diceroller(elem) {
 }
 
 document.getElementById('2').onclick = () => {
-	player_count = 2;
+	player_count = 1;
 	document.getElementById('player1').style.visibility = "visible";
 	document.getElementById('player2').style.visibility = "visible";
 	document.getElementById('player3').style.visibility = "hidden";
@@ -51,7 +51,7 @@ document.getElementById('2').onclick = () => {
 	document.getElementById('playerCount').innerHTML = player_count;
 }
 document.getElementById('3').onclick = () => {
-	player_count = 3;
+	player_count = 2;
 	document.getElementById('player1').style.visibility = "visible";
 	document.getElementById('player2').style.visibility = "visible";
 	document.getElementById('player3').style.visibility = "visible";
@@ -59,7 +59,7 @@ document.getElementById('3').onclick = () => {
 	document.getElementById('playerCount').innerHTML = player_count;
 }
 document.getElementById('4').onclick = () => {
-	player_count = 4;
+	player_count = 3;
 	document.getElementById('player1').style.visibility = "visible";
 	document.getElementById('player2').style.visibility = "visible";
 	document.getElementById('player3').style.visibility = "visible";
@@ -69,8 +69,8 @@ document.getElementById('4').onclick = () => {
 
 document.getElementById('dicecb').onclick = () => {
 	(async () => {
-		document.getElementById('diceval').innerHTML = await diceroller(
-			document.getElementById('diceval'));
+        let dice_result = await diceroller(document.getElementById('diceval'));
+		document.getElementById('diceval').innerHTML = dice_result;
 	})()
 }
 
@@ -85,6 +85,18 @@ document.getElementById('eventcb').onclick = () => {
 document.getElementById('start').onclick = () => {
 	player_index = 1;
 	document.getElementById('p1plc').innerHTML = " (dran)";
+    for(i = 0; i < player_count; i++) {
+        let prep_string = `p${i}`;
+        players.push(prep_string);
+    }
+}
+
+document.getElementById('nextround').onclick = () => {
+    for(i = 0; i < player_count+1; i++) {
+        document.getElementById(`p${i+1}plc`).innerHTML = "";
+    }
+    document.getElementById(`p${player_index+1}plc`).innerHTML = " (dran)";
+    (player_count === player_index) ? player_index = 0 : player_index++;
 }
 
 document.getElementById('player1').setAttribute("width", screen.width);
