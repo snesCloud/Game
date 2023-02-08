@@ -13,7 +13,7 @@
 	    
 	    <p>Spieler: <a id="playerCount">2</a></p>
 
-	    <button id="2" value="2p" name="playerselect" checked>
+	    <button id="2" value="2p" name="playerselect">
 	    <label for="2">2 Spieler &nbsp;</label>
 
 	    <button id="3" value="3p" name="playerselect">
@@ -21,9 +21,14 @@
 
 	    <button id="4" value="4p" name="playerselect">
 	    <label for="4">4 Spieler &nbsp;</label>
+
+	    <button id="start" value="start" name="start">
+	    <label for="start">Start &nbsp;</label>
     </fieldset>
 
     <img src="./ressources/field.png" alt="field" usermap="#field"><br/><br/>
+    
+    <button id="nextround">Nächste Runde</button><br/><br/><br/><br/>
 
     <svg height="115" width="100" visibility="visible" class="player" id="player1">
       <circle cx="25" cy="25" r="20" stroke="grey" stroke-width="5" fill="purple" />
@@ -58,11 +63,11 @@
         <rect x="0" y="0" width="600" height="300" fill="white" rx="10" style="stroke-width: 20px; stroke: black;" />
 	<text x="300" y="150" font-size="2em" fill="black" text-anchor="middle"><a id="specialcard">Ereigniskarte</text>
       </g>
-    </svg> 
+    </svg>
 
     <svg height="300" width="300" visibility="visible" id="dicecb">
       <g>
-        <rect cx="0" cy="0" width="300" height="300" fill="white" rx="25" style="stroke-width: 5px; stroke: black;" />
+        <rect cx="0" cy="0" width="300" height="300" fill="white" id="dice" rx="25" style="stroke-width: 5px; stroke: black;" />
 	<text x="150" y="175" font-size="5em" fill="black" text-anchor="middle"><a id="diceval">Würfeln</a></text>
       </g>
     </svg>

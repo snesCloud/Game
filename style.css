@@ -1,5 +1,5 @@
 html {
-  	font-family: arial, serif;
+  	font-family: arial, roboto, serif;
 }
 
 fieldset {
@@ -8,7 +8,7 @@ fieldset {
 }
 
 button {
-	font-size: 24px;
+	font-size: 48px;
 }
 
 h1 {

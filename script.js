@@ -22,14 +22,24 @@ event_cards.push(
 "Karte 19"
 );
 
-
-
-
 let player_count = 2;
 let screen_width = screen.width;
+let player_index;
 
-let diceroller = () => {
-	return Math.floor(Math.random() * 6) + 1;
+let sleep = (milliseconds) => {
+ return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+async function diceroller(elem) {
+	elem.innerHTML = ".";
+	await sleep(150);
+	elem.innerHTML = "..";
+	await sleep(150);
+	elem.innerHTML = "...";
+	await sleep(150);
+	let min = Math.ceil(1);
+	let max = Math.floor(6);
+	return Math.floor(Math.random() * (max-min) + min);
 }
 
 document.getElementById('2').onclick = () => {
@@ -58,12 +68,23 @@ document.getElementById('4').onclick = () => {
 }
 
 document.getElementById('dicecb').onclick = () => {
-	document.getElementById('diceval').innerHTML = diceroller();
+	(async () => {
+		document.getElementById('diceval').innerHTML = await diceroller(
+			document.getElementById('diceval'));
+	})()
 }
 
 document.getElementById('eventcb').onclick = () => {
-	let index = Math.floor(Math.random() * event_cards.length);
-	document.getElementById('specialcard').innerHTML = event_cards[index];
+	(async () => {
+		await diceroller(document.getElementById('specialcard'));
+	 	let index = Math.floor(Math.random() * event_cards.length);
+		document.getElementById('specialcard').innerHTML = event_cards[index];
+	})()
+}
+
+document.getElementById('start').onclick = () => {
+	player_index = 1;
+	document.getElementById('p1plc').innerHTML = " (dran)";
 }
 
 document.getElementById('player1').setAttribute("width", screen.width);
