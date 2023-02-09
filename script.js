@@ -23,8 +23,17 @@ event_cards.push(
 );
 
 let player_count = 1;
-const players = []
 let player_index;
+let dice_result;
+let i;
+
+let pfd = [
+    {field: 0, tokens: 0}, // Player 0
+    {field: 0, tokens: 0}, // Player 1
+    {field: 0, tokens: 0}, // Player 2
+    {field: 0, tokens: 0}, // Player 3
+    {field: 0, tokens: 0}  // Player Buffer
+];
 
 let sleep = (milliseconds) => {
  return new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -48,7 +57,7 @@ document.getElementById('2').onclick = () => {
 	document.getElementById('player2').style.visibility = "visible";
 	document.getElementById('player3').style.visibility = "hidden";
 	document.getElementById('player4').style.visibility = "hidden";
-	document.getElementById('playerCount').innerHTML = player_count;
+	document.getElementById('playerCount').innerHTML = (player_count + 1).toString();
 }
 document.getElementById('3').onclick = () => {
 	player_count = 2;
@@ -56,7 +65,7 @@ document.getElementById('3').onclick = () => {
 	document.getElementById('player2').style.visibility = "visible";
 	document.getElementById('player3').style.visibility = "visible";
 	document.getElementById('player4').style.visibility = "hidden";
-	document.getElementById('playerCount').innerHTML = player_count;
+    document.getElementById('playerCount').innerHTML = (player_count + 1).toString();
 }
 document.getElementById('4').onclick = () => {
 	player_count = 3;
@@ -64,13 +73,23 @@ document.getElementById('4').onclick = () => {
 	document.getElementById('player2').style.visibility = "visible";
 	document.getElementById('player3').style.visibility = "visible";
 	document.getElementById('player4').style.visibility = "visible";
-	document.getElementById('playerCount').innerHTML = player_count;
+    document.getElementById('playerCount').innerHTML = (player_count + 1).toString();
 }
 
 document.getElementById('dicecb').onclick = () => {
 	(async () => {
-        let dice_result = await diceroller(document.getElementById('diceval'));
+        dice_result = await diceroller(document.getElementById('diceval'));
 		document.getElementById('diceval').innerHTML = dice_result;
+        if(player_index !== 0) {
+            pfd[player_index-1]["field"] += dice_result;
+            document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
+        } else {
+            if(player_count === 3) {
+
+            }
+            pfd[player_count+1]["field"] += dice_result;
+            document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
+        }
 	})()
 }
 
@@ -85,21 +104,18 @@ document.getElementById('eventcb').onclick = () => {
 document.getElementById('start').onclick = () => {
 	player_index = 1;
 	document.getElementById('p1plc').innerHTML = " (dran)";
-    for(i = 0; i < player_count; i++) {
-        let prep_string = `p${i}`;
-        players.push(prep_string);
-    }
 }
 
 document.getElementById('nextround').onclick = () => {
     for(i = 0; i < player_count+1; i++) {
         document.getElementById(`p${i+1}plc`).innerHTML = "";
     }
+    i = 0;
     document.getElementById(`p${player_index+1}plc`).innerHTML = " (dran)";
     (player_count === player_index) ? player_index = 0 : player_index++;
 }
 
-document.getElementById('player1').setAttribute("width", screen.width);
-document.getElementById('player2').setAttribute("width", screen.width);
-document.getElementById('player3').setAttribute("width", screen.width);
-document.getElementById('player4').setAttribute("width", screen.width);
+document.getElementById('player1').setAttribute("width", (screen.width).toString());
+document.getElementById('player2').setAttribute("width", (screen.width).toString());
+document.getElementById('player3').setAttribute("width", (screen.width).toString());
+document.getElementById('player4').setAttribute("width", (screen.width).toString());
