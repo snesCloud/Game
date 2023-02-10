@@ -1,6 +1,6 @@
 const event_cards = [];
 event_cards.push(
-	"Du hast Lobosch die Hand aufgelegt unf wurdest erwischt! Gehe zurück zum letzten Checkpoint. Dein Zug ist beendet.",
+	"Du hast Lobosch die Hand aufgelegt und wurdest erwischt! Gehe zurück zum letzten Checkpoint. Dein Zug ist beendet.",
 	"Du bemühst dich beim erlernen der schwarzen Magie! Rücke 5 Felder vor.",
 	"Du brichst bei der Arbeit des Gevatters zusammen! Setze eine runde aus. Dein Zug ist beendet.",
 	"Der Meister lässt dich nur Nachts arbeiten, wenn es anstrengender ist! Wenn du eine drei Würfelst, darfst du nicht erneut Würfeln.",
@@ -84,9 +84,6 @@ document.getElementById('dicecb').onclick = () => {
             pfd[player_index-1]["field"] += dice_result;
             document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
         } else {
-            if(player_count === 3) {
-
-            }
             pfd[player_count+1]["field"] += dice_result;
             document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
         }
@@ -104,6 +101,7 @@ document.getElementById('eventcb').onclick = () => {
 document.getElementById('start').onclick = () => {
 	player_index = 1;
 	document.getElementById('p1plc').innerHTML = " (dran)";
+	document.getElementById('playerselect').remove();
 }
 
 document.getElementById('nextround').onclick = () => {
