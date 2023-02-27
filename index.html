@@ -1,65 +1,71 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script defer src="script.js"></script>
     <title>Krabat - Spiel</title>
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>Krabat - Spiel</h1>
     <fieldset id="playerselect">
-	    <legend>Spielerauswahl</legend>
-	    
-	    <p>Spieler: <a id="playerCount">2</a></p>
+        <legend>Spielerauswahl</legend>
 
-	    <button id="2" value="2p" name="playerselect">
+        <p>Spieler: <a id="playerCount">2</a></p>
+
+        <button id="2" value="2p" name="playerselect">
 	       <label for="2">2 Spieler &nbsp;</label>
           </button>
 
-	    <button id="3" value="3p" name="playerselect">
+        <button id="3" value="3p" name="playerselect">
 	       <label for="3">3 Spieler &nbsp;</label>
         </button>
 
-	    <button id="4" value="4p" name="playerselect">
+        <button id="4" value="4p" name="playerselect">
                 <label for="4">4 Spieler &nbsp;</label>
         </button>
 
-	    <button id="start" value="start" name="start">
+        <button id="start" value="start" name="start">
             <label for="start">Start &nbsp;</label>
          </button>
     </fieldset>
 
-    <img src="./ressources/field.png"><br/><br/>
-    
-    <button id="nextround">Nächste Runde</button><br/><br/><br/><br/>
+    <img src="./ressources/field.png"><br/> Tokens:
+    <p>
+        &emsp;&ensp;Grabstein 1: <strong><a id="tomb1">&#10004;</a></strong> &emsp;&ensp;Grabstein 2: <strong><a id="tomb1">&#10004;</a></strong> &emsp;&ensp;Grabstein 3: <strong><a id="tomb1">&#10004;</a></strong>
+    </p>
+    <br/>
+
+    <button id="nextround">Nächste Runde</button><br/><br/><br/>
 
     <svg height="115" width="100" visibility="visible" class="player" id="player1">
       <circle cx="25" cy="25" r="20" stroke="grey" stroke-width="5" fill="purple" />
       <text y="35" x="90" fill="black" font-size="2em">Spieler 1<a id="p1plc"></a></text>
-      <text y="75" x="90" fill="black" font-size="2em">Tokens: <a id="p1tokens"></a></text>
-      <text y="115" x="95" fill="black" font-size="2em">Feld: <a id="p1field"></a></text>
+      <text y="75" x="90" fill="black" font-size="2em">Tokens: <a id="p1tokens">0</a></text>
+      <text y="115" x="95" fill="black" font-size="2em">Feld: <a id="p1field">0</a></text>
     </svg>
 
     <svg height="140" width="100" visibility="visible" class="player" id="player2">
       <circle cx="50" cy="50" r="20" stroke="grey" stroke-width="5" fill="yellow" />
       <text y="60" x="90" fill="black" font-size="2em">Spieler 2<a id="p2plc"></a></text>
-      <text y="100" x="90" fill="black" font-size="2em">Tokens: <a id="p2tokens"></a></text>
-      <text y="140" x="90" fill="black" font-size="2em">Feld: <a id="p2field"></a></text>
+      <text y="100" x="90" fill="black" font-size="2em">Tokens: <a id="p2tokens">0</a></text>
+      <text y="140" x="90" fill="black" font-size="2em">Feld: <a id="p2field">0</a></text>
     </svg>
 
-    <svg  height="140" width="100" visibility="hidden" class="player" id="player3">
+    <svg height="140" width="100" visibility="hidden" class="player" id="player3">
       <circle cx="50" cy="50" r="20" stroke="grey" stroke-width="5" fill="black" />
       <text y="60" x="90" fill="black" font-size="2em">Spieler 3<a id="p3plc"></a></text>
-      <text y="100" x="90" fill="black" font-size="2em">Tokens: <a id="p3tokens"></a></text>
-      <text y="140" x="90" fill="black" font-size="2em">Feld: <a id="p3field"></a></text>
+      <text y="100" x="90" fill="black" font-size="2em">Tokens: <a id="p3tokens">0</a></text>
+      <text y="140" x="90" fill="black" font-size="2em">Feld: <a id="p3field">0</a></text>
     </svg>
 
     <svg height="140" width="100" visibility="hidden" class="player" id="player4">
       <circle cx="50" cy="50" r="20" stroke="grey" stroke-width="5" fill="blue" />
       <text y="60" x="90" fill="black" font-size="2em">Spieler 4<a id="p4plc"></a></text>
-      <text y="100" x="90" fill="black" font-size="2em">Tokens: <a id="p4tokens"></a></text>
-      <text y="140" x="90" fill="black" font-size="2em">Feld: <a id="p4field"></a></text>
+      <text y="100" x="90" fill="black" font-size="2em">Tokens: <a id="p4tokens">0</a></text>
+      <text y="140" x="90" fill="black" font-size="2em">Feld: <a id="p4field">0</a></text>
     </svg>
 
     <svg height="300" width="600" visibility="visible" id="eventcb">
@@ -72,8 +78,9 @@
     <svg height="300" width="300" visibility="visible" id="dicecb">
       <g>
         <rect x="0" y="0" width="300" height="300" fill="grey" id="dice" rx="25" style="stroke-width: 5px; stroke: black;" />
-	<text x="150" y="175" font-size="5em" fill="black" text-anchor="middle"><a id="diceval">Würfeln</a></text>
+	      <text x="150" y="175" font-size="5em" fill="black" text-anchor="middle"><a id="diceval">Würfeln</a></text>
       </g>
     </svg>
-  </body>
+</body>
+
 </html>
