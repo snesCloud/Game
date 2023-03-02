@@ -23,6 +23,10 @@ let player_index;
 let dice_result;
 let i;
 
+let tombstones = [
+	{t1: true, t2: true, t3: true}
+];
+
 let pfd = [
     {field: 0, tokens: 0}, // Player 0
     {field: 0, tokens: 0}, // Player 1
@@ -79,9 +83,57 @@ document.getElementById('dicecb').onclick = () => {
         if(player_index !== 0) {
             pfd[player_index-1]["field"] += dice_result;
             document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
+			if(document.getElementById(`p${player_index}field`).innerHTML === "8") {
+				if(tombstones[0].t1) {
+					pfd[player_index-1]["tokens"] += 1;
+					document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+				}
+				document.getElementById('tomb1').innerHTML = "&#215;";
+				tombstones[0].t1 = false;
+			}
+			if(document.getElementById(`p${player_index}field`).innerHTML === "22") {
+				if(tombstones[0].t2) {
+					pfd[player_index-1]["tokens"] += 1;
+					document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+				}
+				document.getElementById('tomb2').innerHTML = "&#215;";
+				tombstones[0].t2 = false;
+			}
+			if(document.getElementById(`p${player_index}field`).innerHTML === "41") {
+				if(tombstones[0].t3) {
+					pfd[player_index-1]["tokens"] += 1;
+					document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+				}
+				document.getElementById('tomb3').innerHTML = "&#215;";
+				tombstones[0].t3 = false;
+			}
         } else {
             pfd[player_count+1]["field"] += dice_result;
             document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
+			if(document.getElementById(`p${player_count+1}field`).innerHTML === "8") {
+				if(tombstones[0].t1) {
+					pfd[player_count+1]["tokens"] += 1;
+					document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+				}
+				document.getElementById('tomb1').innerHTML = "&#215;";
+				tombstones[0].t1 = false;
+			}
+			if(document.getElementById(`p${player_count+1}field`).innerHTML === "22") {
+				if(tombstones[0].t2) {
+					pfd[player_count+1]["tokens"] += 1;
+					document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+				}
+				document.getElementById('tomb2').innerHTML = "&#215;";
+				tombstones[0].t2 = false;
+			}
+			if(document.getElementById(`p${player_count+1}field`).innerHTML === "41") {
+				if(tombstones[0].t3) {
+					pfd[player_count+1]["tokens"] += 1;
+					document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+				}
+				document.getElementById('tomb3').innerHTML = "&#215;";
+				tombstones[0].t3 = false;
+			}
         }
 	})()
 }
