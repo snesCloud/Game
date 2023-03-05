@@ -105,11 +105,13 @@ document.getElementById('dicecb').onclick = () => {
 					}
 					document.getElementById('tomb1').innerHTML = "&#215;";
 					tombstones[0] = false;
+					player_move(player_index, 0, 0);
 				}
 				if(document.getElementById(`p${player_index}field`).innerHTML === "23") {
 					if(tombstones[1]) {
 						pfd[player_index-1]["tokens"] += 1;
 						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						player_move(player_index, 0, 0);
 					}
 					document.getElementById('tomb2').innerHTML = "&#215;";
 					tombstones[1] = false;
@@ -121,6 +123,7 @@ document.getElementById('dicecb').onclick = () => {
 					}
 					document.getElementById('tomb3').innerHTML = "&#215;";
 					tombstones[2] = false;
+					player_move(player_index, 0, 0);
 				}
 				if(pfd[player_index-1]["field"] === 53) {
 					document.getElementById('dicecb').style.visibility = "hidden";
@@ -165,6 +168,7 @@ document.getElementById('dicecb').onclick = () => {
 					}
 					document.getElementById('tomb1').innerHTML = "&#215;";
 					tombstones[0] = false;
+					player_move(player_index, 0, 1);
 				}
 				if(document.getElementById(`p${player_count+1}field`).innerHTML === "23") {
 					if(tombstones[1]) {
@@ -173,6 +177,7 @@ document.getElementById('dicecb').onclick = () => {
 					}
 					document.getElementById('tomb2').innerHTML = "&#215;";
 					tombstones[1] = false;
+					player_move(player_index, 0, 1);
 				}
 				if(document.getElementById(`p${player_count+1}field`).innerHTML === "42") {
 					if(tombstones[2]) {
@@ -181,6 +186,7 @@ document.getElementById('dicecb').onclick = () => {
 					}
 					document.getElementById('tomb3').innerHTML = "&#215;";
 					tombstones[2] = false;
+					player_move(player_index, 0, 1);
 				}
 			} else if (pfd[player_count+1]["field"] === 53) {
 				document.getElementById('dicecb').style.visibility = "hidden";
