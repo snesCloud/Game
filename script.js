@@ -103,6 +103,7 @@ document.getElementById('dicecb').onclick = () => {
 						pfd[player_index-1]["tokens"] += 1;
 						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
 					}
+					tombstones[0] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
 					document.getElementById('tomb1').innerHTML = "&#215;";
 					tombstones[0] = false;
 					player_move(player_index, 0, 0);
@@ -111,16 +112,18 @@ document.getElementById('dicecb').onclick = () => {
 					if(tombstones[1]) {
 						pfd[player_index-1]["tokens"] += 1;
 						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
-						player_move(player_index, 0, 0);
 					}
+					tombstones[1] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
 					document.getElementById('tomb2').innerHTML = "&#215;";
 					tombstones[1] = false;
+					player_move(player_index, 0, 0);
 				}
 				if(document.getElementById(`p${player_index}field`).innerHTML === "42") {
 					if(tombstones[2]) {
 						pfd[player_index-1]["tokens"] += 1;
 						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
 					}
+					tombstones[2] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
 					document.getElementById('tomb3').innerHTML = "&#215;";
 					tombstones[2] = false;
 					player_move(player_index, 0, 0);
@@ -135,23 +138,29 @@ document.getElementById('dicecb').onclick = () => {
 					// Ladders
 					case 6:
 						player_move(player_index, 16, 0);
+						alert("Stark! Du bist von Feld 6 auf Feld 16 aufgestiegen! (Leiter)");
 					    break;
 					case 21:
 						player_move(player_index, 28, 0);
+						alert("Stark! Du bist von Feld 21 auf Feld 28 aufgestiegen! (Leiter)");
 						break;
 					case 32:
 						player_move(player_index, 44, 0);
+						alert("Stark! Du bist von Feld 32 auf Feld 44 aufgestiegen! (Leiter)");
 						break;
 
 					// Slides
 					case 19:
 						player_move(player_index, 3, 0);
+						alert("Schade! Du bist von Feld 19 auf Feld 3 abgerutscht! (Rutsche)");
                         break;
 					case 34:
 						player_move(player_index, 14, 0);
+						alert("Schade! Du bist von Feld 34 auf Feld 14 abgerutscht! (Rutsche)");
 						break;
 					case 52:
 						player_move(player_index, 40, 0);
+						alert("Schade! Du bist von Feld 52 auf Feld 40 abgerutscht! (Rutsche)");
 						break;
 					default:
 						break;
