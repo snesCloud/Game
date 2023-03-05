@@ -24,7 +24,9 @@ let dice_result;
 let i;
 
 let tombstones = [
-	{t1: true, t2: true, t3: true}
+	true,
+	true,
+	true
 ];
 
 let pfd = [
@@ -80,59 +82,71 @@ document.getElementById('dicecb').onclick = () => {
 	(async () => {
         dice_result = await diceroller(document.getElementById('diceval'));
 		document.getElementById('diceval').innerHTML = dice_result;
-        if(player_index !== 0) {
-            pfd[player_index-1]["field"] += dice_result;
-            document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
-			if(document.getElementById(`p${player_index}field`).innerHTML === "8") {
-				if(tombstones[0].t1) {
-					pfd[player_index-1]["tokens"] += 1;
-					document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+		if(player_index !== 0) {
+			if(pfd[player_index-1]["field"] + dice_result <= 53) {
+				pfd[player_index-1]["field"] += dice_result;
+				document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
+				if(document.getElementById(`p${player_index}field`).innerHTML === "8") {
+					if(tombstones[0]) {
+						pfd[player_index-1]["tokens"] += 1;
+						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+					}
+					document.getElementById('tomb1').innerHTML = "&#215;";
+					tombstones[0] = false;
 				}
-				document.getElementById('tomb1').innerHTML = "&#215;";
-				tombstones[0].t1 = false;
-			}
-			if(document.getElementById(`p${player_index}field`).innerHTML === "22") {
-				if(tombstones[0].t2) {
-					pfd[player_index-1]["tokens"] += 1;
-					document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+				if(document.getElementById(`p${player_index}field`).innerHTML === "23") {
+					if(tombstones[1]) {
+						pfd[player_index-1]["tokens"] += 1;
+						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+					}
+					document.getElementById('tomb2').innerHTML = "&#215;";
+					tombstones[1] = false;
 				}
-				document.getElementById('tomb2').innerHTML = "&#215;";
-				tombstones[0].t2 = false;
-			}
-			if(document.getElementById(`p${player_index}field`).innerHTML === "41") {
-				if(tombstones[0].t3) {
-					pfd[player_index-1]["tokens"] += 1;
-					document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+				if(document.getElementById(`p${player_index}field`).innerHTML === "42") {
+					if(tombstones[2]) {
+						pfd[player_index-1]["tokens"] += 1;
+						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+					}
+					document.getElementById('tomb3').innerHTML = "&#215;";
+					tombstones[2] = false;
+				} else if(pfd[player_index-1]["field"] === 53) {
+					document.getElementById('dicecb').style.visibility = "hidden";
+					document.getElementById('eventcb').style.visibility = "hidden";
+					alert(`Spieler ${player_index} hat das Spiel gewonnen!`);
 				}
-				document.getElementById('tomb3').innerHTML = "&#215;";
-				tombstones[0].t3 = false;
-			}
+			}	
         } else {
-            pfd[player_count+1]["field"] += dice_result;
-            document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
-			if(document.getElementById(`p${player_count+1}field`).innerHTML === "8") {
-				if(tombstones[0].t1) {
-					pfd[player_count+1]["tokens"] += 1;
-					document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+			if(pfd[player_count+1]["field"] + dice_result <= 53) {
+				pfd[player_count+1]["field"] += dice_result;
+				document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
+				if(document.getElementById(`p${player_count+1}field`).innerHTML === "8") {
+					if(tombstones[0]) {
+						pfd[player_count+1]["tokens"] += 1;
+						document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+					}
+					document.getElementById('tomb1').innerHTML = "&#215;";
+					tombstones[0] = false;
 				}
-				document.getElementById('tomb1').innerHTML = "&#215;";
-				tombstones[0].t1 = false;
-			}
-			if(document.getElementById(`p${player_count+1}field`).innerHTML === "22") {
-				if(tombstones[0].t2) {
-					pfd[player_count+1]["tokens"] += 1;
-					document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+				if(document.getElementById(`p${player_count+1}field`).innerHTML === "23") {
+					if(tombstones[1]) {
+						pfd[player_count+1]["tokens"] += 1;
+						document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+					}
+					document.getElementById('tomb2').innerHTML = "&#215;";
+					tombstones[1] = false;
 				}
-				document.getElementById('tomb2').innerHTML = "&#215;";
-				tombstones[0].t2 = false;
-			}
-			if(document.getElementById(`p${player_count+1}field`).innerHTML === "41") {
-				if(tombstones[0].t3) {
-					pfd[player_count+1]["tokens"] += 1;
-					document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+				if(document.getElementById(`p${player_count+1}field`).innerHTML === "42") {
+					if(tombstones[2]) {
+						pfd[player_count+1]["tokens"] += 1;
+						document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+					}
+					document.getElementById('tomb3').innerHTML = "&#215;";
+					tombstones[2] = false;
 				}
-				document.getElementById('tomb3').innerHTML = "&#215;";
-				tombstones[0].t3 = false;
+			} else if (pfd[player_count+1]["field"] === 53) {
+				document.getElementById('dicecb').style.visibility = "hidden";
+				document.getElementById('eventcb').style.visibility = "hidden";
+				alert(`Spieler ${player_count+1} hat das Spiel gewonnen!`);
 			}
         }
 	})()

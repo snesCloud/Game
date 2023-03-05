@@ -1,9 +1,6 @@
 - Spielregel umsetzen (z. B. nach drei tokens aufteilen oder so)
 - Leitern einfügen
-- Spielfeld Limit
-- lange version
-- ereigniskarten mit aktionen verbinden
-- Neues Spielbrett einscannen und nummerieren (start bei null)
+- Ereigniskarten mit Aktionen verbinden
 - Nach Fehlern suchen und polishen
 - Optik anpassen
 - Stein
