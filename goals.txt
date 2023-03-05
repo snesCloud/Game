@@ -1,6 +1,5 @@
 - Spielregel umsetzen (z. B. nach drei tokens aufteilen oder so)
-- Leitern einfügen
+- Bei automatisierten Aktionen Info oder Animation einfügen
 - Ereigniskarten mit Aktionen verbinden
 - Nach Fehlern suchen und polishen
 - Optik anpassen
-- Stein

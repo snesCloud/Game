@@ -41,6 +41,17 @@ let sleep = (milliseconds) => {
  return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
+let player_move = (proc_player, newfield, type) => {
+	if(type === 0) {
+		pfd[proc_player - 1]["field"] = newfield;
+        document.getElementById(`p${proc_player}field`).innerHTML = newfield;
+	}
+	else if(type === 1) {
+        pfd[player_count + 1]["field"] = newfield;
+        document.getElementById(`p${player_count + 1}field`).innerHTML = newfield;
+    }
+}
+
 async function diceroller(elem) {
 	elem.innerHTML = ".";
 	await sleep(150);
@@ -86,6 +97,7 @@ document.getElementById('dicecb').onclick = () => {
 			if(pfd[player_index-1]["field"] + dice_result <= 53) {
 				pfd[player_index-1]["field"] += dice_result;
 				document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
+				// Tombstones
 				if(document.getElementById(`p${player_index}field`).innerHTML === "8") {
 					if(tombstones[0]) {
 						pfd[player_index-1]["tokens"] += 1;
@@ -109,10 +121,37 @@ document.getElementById('dicecb').onclick = () => {
 					}
 					document.getElementById('tomb3').innerHTML = "&#215;";
 					tombstones[2] = false;
-				} else if(pfd[player_index-1]["field"] === 53) {
+				}
+				if(pfd[player_index-1]["field"] === 53) {
 					document.getElementById('dicecb').style.visibility = "hidden";
 					document.getElementById('eventcb').style.visibility = "hidden";
 					alert(`Spieler ${player_index} hat das Spiel gewonnen!`);
+				}
+				// Ladders and sliedes
+				switch(pfd[player_index-1]["field"]) {
+					// Ladders
+					case 6:
+						player_move(player_index, 16, 0);
+					    break;
+					case 21:
+						player_move(player_index, 28, 0);
+						break;
+					case 32:
+						player_move(player_index, 44, 0);
+						break;
+
+					// Slides
+					case 19:
+						player_move(player_index, 3, 0);
+                        break;
+					case 34:
+						player_move(player_index, 14, 0);
+						break;
+					case 52:
+						player_move(player_index, 40, 0);
+						break;
+					default:
+						break;
 				}
 			}	
         } else {
@@ -148,6 +187,32 @@ document.getElementById('dicecb').onclick = () => {
 				document.getElementById('eventcb').style.visibility = "hidden";
 				alert(`Spieler ${player_count+1} hat das Spiel gewonnen!`);
 			}
+			// Ladders and sliedes
+			switch(pfd[player_count + 1]["field"]) {
+				// Ladders
+				case 6:
+					player_move(player_index, 16, 1);
+					break;
+				case 21:
+					player_move(player_index, 28, 1);
+					break;
+				case 32:
+					player_move(player_index, 44, 1);
+					break;
+
+				// Slides
+				case 19:
+					player_move(player_index, 3, 1);
+					break;
+				case 34:
+					player_move(player_index, 14, 1);
+					break;
+				case 52:
+					player_move(player_index, 40, 1);
+					break;
+				default:
+					break;
+			}
         }
 	})()
 }
@@ -156,7 +221,8 @@ document.getElementById('eventcb').onclick = () => {
 	(async () => {
 		await diceroller(document.getElementById('specialcard'));
 	 	let index = Math.floor(Math.random() * event_cards.length);
-		document.getElementById('specialcard').innerHTML = event_cards[index];
+		alert(event_cards[index]);
+		document.getElementById('specialcard').innerHTML = "Ereigniskarte";
 	})()
 }
 

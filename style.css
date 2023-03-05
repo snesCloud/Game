@@ -2,8 +2,9 @@ html {
   	font-family: arial, roboto, serif;
 }
 
-html, h1, h2, h3, h4, h5, h6, text, button, fieldset {
-	background-color: rgb(91, 85, 81);
+html/*, h1, h2, h3, h4, h5, h6, text, button, fieldset */{
+	/*background-color: rgb(91, 85, 81);*/
+	background-image: linear-gradient(rgb(189, 182, 172), rgb(38, 34, 31));
 } 
 
 fieldset {
@@ -12,6 +13,7 @@ fieldset {
 }
 
 button {
+	background-color: rgba(148, 148, 148, 0.25);
 	font-size: 48px;
 }
 
