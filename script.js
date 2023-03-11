@@ -1,22 +1,17 @@
 const event_cards = [];
 event_cards.push(
+	"Der Meister hat dir frei gegeben! Gehe 5 Felder nach vorn.",
+	"Der Meister nimmt dich mit nach Dresden und zeigt dir einen neuen Zauberspruch, durch den du viel schneller Arbeiten kannst. Rücke 5 Felder nach vorne.",
+	"Pumphutt hat den Meister überlistet und alle kriegen mehr Essen. Alle Spieler dürfen 3 Felder nach vorne rücken.",/*
 	"Du hast Lobosch die Hand aufgelegt und wurdest erwischt! Setze eine Runde aus. Dein Zug ist beendet.",
 	"Du bist bei der Arbeit des Gevatters zusammengebrochen und musst dich ausruhen! Setze eine Runde aus. Dein Zug ist beendet.",
-	"Die Osternacht ist gekommen und du gehst mit einem anderen Gesellen zu „Bäumels Tod“. Gehe zum dir nächsten Spieler nach vorne oder zurück.",
 	"Witko benötigt Hilfe bei der Arbeit! Zeige diese Karte einem beliebigen Spieler. Dieser wird in der nächsten Runde aussetzen müssen.",
 	"Die Neujahrsnacht kommt und alle sind ängstlich. Du darfst bis zum Ende dieses Jahres bei einer 3 nicht nochmal würfeln.",
 	"Der Meister lässt euch nur in der Nacht arbeiten! Du bist erschöpft und musst eine Runde aussetzen. Dein Zug ist beendet.",
 	"Du strengst dich beim Erlernen der schwarzen Künste an! Du darfst noch einmal würfeln.",
-	"Der Meister hat dir frei gegeben! Gehe 5 Felder nach vorn.",
-	"Du und die anderen Gesellen ärgern die Anwerber! Jeder Spieler rückst zwei Felder nach vorne.",
-	"Das Mühlrad muss ersetzt werden! Zeige diese Karte einem anderen Spieler. Dieser muss 4 Felder zurück gehen.",
-	"Der Meister nimmt dich mit nach Dresden und zeigt dir einen neuen Zauberspruch, durch den du viel schneller Arbeiten kannst. Rücke 5 Felder nach vorne.",
-	"Pumphutt hat den Meister überlistet und alle kriegen mehr Essen. Alle Spieler dürfen 3 Felder nach vorne rücken.",
-	"Du musst die Geschichte des Meisters und Jirko nachspielen. Dabei wirst du von der Munition verletzt und musst dich für eine Weile ausruhen. Gehe zum Anfang des Jahres zurück.",
 	"Du bist mit deinen Gedanken nur noch bei der Kantorka und kannst dich nicht mehr richtig auf die Arbeit konzentrieren. Du darfst bis zum Ende des Jahres bei einer 3 nicht mehr würfeln.",
-	"Der Meister will, dass du die Mühle übernimmst. Du lehnst jedoch ab und bekommst eine Woche Gedenkzeit, in der du keine Magie verwenden kannst. Setze eine Runde aus. Dein Zug ist beendet.",
-	"Du hast einen praktischen Zauber erlernt. Suche dir einen Token aus und nehme in zu dir.",
-);
+	"Der Meister will, dass du die Mühle übernimmst. Du lehnst jedoch ab und bekommst eine Woche Gedenkzeit, in der du keine Magie verwenden kannst. Setze eine Runde aus. Dein Zug ist beendet."
+*/);
 
 let player_count = 1;
 let player_index;
@@ -232,11 +227,44 @@ document.getElementById('dicecb').onclick = () => {
 	})()
 }
 
+// Event cards
 document.getElementById('eventcb').onclick = () => {
 	(async () => {
 		await diceroller(document.getElementById('specialcard'));
 	 	let index = Math.floor(Math.random() * event_cards.length);
 		alert(event_cards[index]);
+		if(event_cards[index] === "Der Meister hat dir frei gegeben! Gehe 5 Felder nach vorn.") {
+			if(player_index !== 0) {
+				if(!pfd[player_index-1]["field"] + 5 <= 53) {
+					pfd[player_index-1]["field"] += 5;
+					document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
+				}
+			} else {
+				if(!pfd[player_count+1]["field"] + 5 <= 53) {
+					pfd[player_count+1]["field"] += 5;
+					document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
+				}
+			}
+		} else if(event_cards[index] === "Pumphutt hat den Meister überlistet und alle kriegen mehr Essen. Alle Spieler dürfen 3 Felder nach vorne rücken.") {
+			for(let i = 0; i < player_count+1; i++) {
+				if(!pfd[i]["field"] + 3 <= 53) {
+					pfd[i]["field"] += 3;
+					document.getElementById(`p${i+1}field`).innerHTML = pfd[i]["field"];
+				}
+			}
+		} else if(event_cards[index] === "Der Meister nimmt dich mit nach Dresden und zeigt dir einen neuen Zauberspruch, durch den du viel schneller Arbeiten kannst. Rücke 5 Felder nach vorne.") {
+			if(player_index!== 0) {
+				if(!pfd[player_index-1]["field"] + 5 <= 53) {
+					pfd[player_index-1]["field"] += 5;
+					document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
+				}
+            } else {
+				if(!pfd[player_count+1]["field"] + 5 <= 53) {
+					pfd[player_count+1]["field"] += 5;
+					document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
+				}
+            }
+		}
 		document.getElementById('specialcard').innerHTML = "Ereigniskarte";
 	})()
 }
@@ -244,7 +272,7 @@ document.getElementById('eventcb').onclick = () => {
 document.getElementById('start').onclick = () => {
 	player_index = 1;
 	document.getElementById('p1plc').innerHTML = " (dran)";
-	document.getElementById('playerselect').remove();
+	document.getElementById('playerselect').remove();	
 }
 
 document.getElementById('nextround').onclick = () => {
