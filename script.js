@@ -2,16 +2,16 @@ const event_cards = [];
 event_cards.push(
 	"Der Meister hat dir frei gegeben! Gehe 5 Felder nach vorn.",
 	"Der Meister nimmt dich mit nach Dresden und zeigt dir einen neuen Zauberspruch, durch den du viel schneller Arbeiten kannst. Rücke 5 Felder nach vorne.",
-	"Pumphutt hat den Meister überlistet und alle kriegen mehr Essen. Alle Spieler dürfen 3 Felder nach vorne rücken.",/*
+	"Pumphutt hat den Meister überlistet und alle kriegen mehr Essen. Alle Spieler dürfen 3 Felder nach vorne rücken.",
+	"Du und die anderen Gesellen ärgern die Anwerber! Jeder Spieler rückst zwei Felder nach vorne.",
 	"Du hast Lobosch die Hand aufgelegt und wurdest erwischt! Setze eine Runde aus. Dein Zug ist beendet.",
 	"Du bist bei der Arbeit des Gevatters zusammengebrochen und musst dich ausruhen! Setze eine Runde aus. Dein Zug ist beendet.",
-	"Witko benötigt Hilfe bei der Arbeit! Zeige diese Karte einem beliebigen Spieler. Dieser wird in der nächsten Runde aussetzen müssen.",
 	"Die Neujahrsnacht kommt und alle sind ängstlich. Du darfst bis zum Ende dieses Jahres bei einer 3 nicht nochmal würfeln.",
 	"Der Meister lässt euch nur in der Nacht arbeiten! Du bist erschöpft und musst eine Runde aussetzen. Dein Zug ist beendet.",
 	"Du strengst dich beim Erlernen der schwarzen Künste an! Du darfst noch einmal würfeln.",
 	"Du bist mit deinen Gedanken nur noch bei der Kantorka und kannst dich nicht mehr richtig auf die Arbeit konzentrieren. Du darfst bis zum Ende des Jahres bei einer 3 nicht mehr würfeln.",
 	"Der Meister will, dass du die Mühle übernimmst. Du lehnst jedoch ab und bekommst eine Woche Gedenkzeit, in der du keine Magie verwenden kannst. Setze eine Runde aus. Dein Zug ist beendet."
-*/);
+);
 
 let player_count = 1;
 let player_index;
@@ -94,34 +94,64 @@ document.getElementById('dicecb').onclick = () => {
 				document.getElementById(`p${player_index}field`).innerHTML = pfd[player_index-1]["field"];
 				// Tombstones
 				if(document.getElementById(`p${player_index}field`).innerHTML === "8") {
-					if(tombstones[0]) {
+					if(pfd[player_index-1]["tokens"] > 0) {
+						if(window.confirm("Du bist auf einen Grabstein gekommen! Willst du einen Token einsetzen?")) {
+							pfd[player_index-1]["tokens"] -= 1;
+							document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						} else {
+							player_move(player_index, 0, 0);
+						}
+					} else {
+						tombstones[0] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
+						
+						player_move(player_index, 0, 0);
+					}
+					if(tombstones[0] && pfd[player_index-1]["tokens"] < 2) {
 						pfd[player_index-1]["tokens"] += 1;
 						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						document.getElementById('tomb1').innerHTML = "&#215;";
+						tombstones[0] = false;
 					}
-					tombstones[0] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
-					document.getElementById('tomb1').innerHTML = "&#215;";
-					tombstones[0] = false;
-					player_move(player_index, 0, 0);
 				}
 				if(document.getElementById(`p${player_index}field`).innerHTML === "23") {
-					if(tombstones[1]) {
+					if(pfd[player_index-1]["tokens"] > 0) {
+						if(window.confirm("Du bist auf einen Grabstein gekommen! Willst du einen Token einsetzen?")) {
+							pfd[player_index-1]["tokens"] -= 1;
+							document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						} else {
+							player_move(player_index, 0, 0);
+						}
+					} else {
+						tombstones[1] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
+						
+						player_move(player_index, 0, 0);
+					}
+					
+					if(tombstones[1] && pfd[player_index-1]["tokens"] < 2) {
 						pfd[player_index-1]["tokens"] += 1;
 						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						document.getElementById('tomb2').innerHTML = "&#215;";
+						tombstones[1] = false;
 					}
-					tombstones[1] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
-					document.getElementById('tomb2').innerHTML = "&#215;";
-					tombstones[1] = false;
-					player_move(player_index, 0, 0);
 				}
 				if(document.getElementById(`p${player_index}field`).innerHTML === "42") {
-					if(tombstones[2]) {
+					if(tombstones[2] && pfd[player_index-1]["tokens"] < 2) {
 						pfd[player_index-1]["tokens"] += 1;
 						document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						document.getElementById('tomb3').innerHTML = "&#215;";
+						tombstones[2] = false;
 					}
-					tombstones[2] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
-					document.getElementById('tomb3').innerHTML = "&#215;";
-					tombstones[2] = false;
-					player_move(player_index, 0, 0);
+					if(pfd[player_index-1]["tokens"] > 0) {
+						if(window.confirm("Du bist auf einen Grabstein gekommen! Willst du einen Token einsetzen?")) {
+							pfd[player_index-1]["tokens"] -= 1;
+							document.getElementById(`p${player_index}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						} else {
+							player_move(player_index, 0, 0);
+						}
+					} else {
+						tombstones[2] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
+						player_move(player_index, 0, 0);
+					}
 				}
 				if(pfd[player_index-1]["field"] === 53) {
 					document.getElementById('dicecb').style.visibility = "hidden";
@@ -166,31 +196,61 @@ document.getElementById('dicecb').onclick = () => {
 				pfd[player_count+1]["field"] += dice_result;
 				document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
 				if(document.getElementById(`p${player_count+1}field`).innerHTML === "8") {
-					if(tombstones[0]) {
+					if(pfd[player_count+1]["tokens"] > 0) {
+						if(window.confirm("Du bist auf einen Grabstein gekommen! Willst du einen Token einsetzen?")) {
+							pfd[player_count+1]["tokens"] -= 1;
+							document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						} else {
+							player_move(player_index, 0, 1);
+						}
+					} else {
+						tombstones[0] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
+						player_move(player_index, 0, 1);
+					}
+					if(tombstones[0] && pfd[player_count+1]["tokens"] < 2) {
 						pfd[player_count+1]["tokens"] += 1;
 						document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
-					}
-					document.getElementById('tomb1').innerHTML = "&#215;";
-					tombstones[0] = false;
-					player_move(player_index, 0, 1);
+						document.getElementById('tomb1').innerHTML = "&#215;";
+						tombstones[0] = false;
+					}	
 				}
 				if(document.getElementById(`p${player_count+1}field`).innerHTML === "23") {
-					if(tombstones[1]) {
+					if(pfd[player_count+1]["tokens"] > 0) {
+						if(window.confirm("Du bist auf einen Grabstein gekommen! Willst du einen Token einsetzen?")) {
+							pfd[player_count+1]["tokens"] -= 1;
+							document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						} else {
+							player_move(player_index, 0, 1);
+						}
+					} else {
+						tombstones[1] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
+						player_move(player_index, 0, 1);
+					}
+					if(tombstones[1] && pfd[player_count+1]["tokens"] < 2) {
 						pfd[player_count+1]["tokens"] += 1;
 						document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+						document.getElementById('tomb2').innerHTML = "&#215;";
+						tombstones[1] = false;
 					}
-					document.getElementById('tomb2').innerHTML = "&#215;";
-					tombstones[1] = false;
-					player_move(player_index, 0, 1);
 				}
 				if(document.getElementById(`p${player_count+1}field`).innerHTML === "42") {
-					if(tombstones[2]) {
+					if(pfd[player_count+1]["tokens"] > 0) {
+						if(window.confirm("Du bist auf einen Grabstein gekommen! Willst du einen Token einsetzen?")) {
+							pfd[player_count+1]["tokens"] -= 1;
+							document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_index-1]["tokens"];
+						} else {
+							player_move(player_index, 0, 1);
+						}
+					} else {
+						tombstones[2] ? alert("Du bist auf einen Grabstein gekommen und hast jetzt einen Token mehr!") : alert("Du bist auf einen Grabstein gekommen!");
+						player_move(player_index, 0, 1);
+					}
+					if(tombstones[2] && pfd[player_count+1]["tokens"] < 2) {
 						pfd[player_count+1]["tokens"] += 1;
 						document.getElementById(`p${player_count+1}tokens`).innerHTML = pfd[player_count+1]["tokens"];
+						document.getElementById('tomb3').innerHTML = "&#215;";
+						tombstones[2] = false;
 					}
-					document.getElementById('tomb3').innerHTML = "&#215;";
-					tombstones[2] = false;
-					player_move(player_index, 0, 1);
 				}
 			} else if (pfd[player_count+1]["field"] === 53) {
 				document.getElementById('dicecb').style.visibility = "hidden";
@@ -264,6 +324,13 @@ document.getElementById('eventcb').onclick = () => {
 					document.getElementById(`p${player_count+1}field`).innerHTML = pfd[player_count+1]["field"];
 				}
             }
+		} else if(event_cards[index] === "Du und die anderen Gesellen ärgern die Anwerber! Jeder Spieler rückst zwei Felder nach vorne.") {
+			for(let i = 0; i < player_count+1; i++) {
+				if(!pfd[i]["field"] + 3 <= 53) {
+					pfd[i]["field"] += 3;
+					document.getElementById(`p${i+1}field`).innerHTML = pfd[i]["field"];
+				}
+			}
 		}
 		document.getElementById('specialcard').innerHTML = "Ereigniskarte";
 	})()
